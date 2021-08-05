@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Box} from "@material-ui/core";
+
+import Treeview from "./components/Treeview";
+import Sidebar from "./components/Sidebar";
+import NoteInfo from "./components/NoteInfo";
+import Note from "./components/Note";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return (
+        <Box sx={{
+            height: "100vh",
+            display: 'grid',
+            gridTemplateColumns: '0.02fr 30% 1fr',
+            gridTemplateRows: '.05fr 1fr 1fr',
+            gridTemplateAreas: '"sidebar treeview noteInfo" "sidebar treeview note" "sidebar treeview note"'
+        }}>
+            <Box sx={{gridArea: 'sidebar'}}><Sidebar/></Box>
+            <Box sx={{gridArea: 'treeview'}}><Treeview/></Box>
+            <Box sx={{gridArea: 'noteInfo'}}><NoteInfo/></Box>
+            <Box sx={{gridArea: 'note'}}><Note/></Box>
+        </Box>
+    );
 }
 
 export default App;
