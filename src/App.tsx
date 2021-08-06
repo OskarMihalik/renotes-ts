@@ -6,6 +6,8 @@ import Sidebar from "./components/Sidebar";
 import NoteInfo from "./components/NoteInfo";
 import Note from "./components/Note";
 
+// to create draggable notes https://javascript.plainenglish.io/how-to-make-a-simple-custom-drag-to-move-component-in-react-f67d5c99f925
+
 function App() {
 
     return (
@@ -16,8 +18,8 @@ function App() {
             gridTemplateRows: '.05fr 1fr 1fr',
             gridTemplateAreas: '"sidebar treeview noteInfo" "sidebar treeview note" "sidebar treeview note"'
         }}>
-            <Box sx={{gridArea: 'sidebar'}}><Sidebar/></Box>
-            <Box sx={{gridArea: 'treeview'}}><Treeview/></Box>
+            <Box sx={{gridArea: 'sidebar'}} borderRight={1}><Sidebar/></Box>
+            <Box sx={{gridArea: 'treeview'}} borderRight={1} p={2}><Treeview/></Box>
             <Box sx={{gridArea: 'noteInfo'}}><NoteInfo/></Box>
             <Box sx={{gridArea: 'note'}}><Note/></Box>
         </Box>
