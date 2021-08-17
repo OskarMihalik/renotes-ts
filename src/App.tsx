@@ -19,7 +19,7 @@ function App() {
             gridTemplateAreas: '"sidebar treeview noteInfo" "sidebar treeview note" "sidebar treeview note"'
         }}>
             <Box sx={{gridArea: 'sidebar'}} borderRight={1}><Sidebar/></Box>
-            <Box sx={{gridArea: 'treeview'}} borderRight={1} p={2}><Treeview/></Box>
+            <Box sx={{gridArea: 'treeview'}} borderRight={1} p={'10px 10px 10px 0px'}><Treeview/></Box>
             <Box sx={{gridArea: 'noteInfo'}}><NoteInfo/></Box>
             <Box sx={{gridArea: 'note'}}><Note/></Box>
         </Box>

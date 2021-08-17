@@ -5,6 +5,11 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
+import {useDispatch} from "react-redux";
+import {bindActionCreators} from "redux";
+import {actionCreators} from '../store'
+import {DefaultNoteStateI} from '../store/reducers/NotesReducer'
+import {v4 as uuidv4} from 'uuid';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -24,6 +29,8 @@ const useStyles = makeStyles((theme: Theme) =>
     }))
 
 const Sidebar: FC = () => {
+    const dispatch = useDispatch()
+    const {addNote} = bindActionCreators(actionCreators, dispatch)
     const classes = useStyles();
     const fileInputRef=useRef<HTMLInputElement>(null);
 
@@ -37,6 +44,12 @@ const Sidebar: FC = () => {
             <input ref={fileInputRef} type={'file'} accept={'.txt'} hidden style={{display:'none'}}/>
             <Button
                 className={classes.element}
+                onClick={() =>addNote({
+                    id: uuidv4(),
+                    title: 'new note',
+                    creationDate: Date().toLocaleString(),
+                    content: '',
+                })}
             >
                 <AddIcon/>
             </Button>
@@ -49,7 +62,6 @@ const Sidebar: FC = () => {
             <Button
                 className={classes.element}
             >
-
             </Button>
         </div>
     );
