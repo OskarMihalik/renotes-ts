@@ -8,7 +8,8 @@ import {TreeView} from "@material-ui/lab";
 const Treeview = () => {
     const dispatch = useDispatch()
     const notes = useSelector((state: State) => state.notes)
-    console.log(notes.activeNoteIndex.toString())
+    const {changeActiveNoteIndex} = bindActionCreators(actionCreators, dispatch)
+
     return (
         <div>
             <TreeView
@@ -18,9 +19,11 @@ const Treeview = () => {
                 {notes.notes.map((note, index) => {
                     return (
                         <TreeItem
+                            key={index}
                             nodeId={index.toString()}
                             label={note.title ? note.title : '...'}
                             color={'secondary'}
+                            onClick={()=> changeActiveNoteIndex(index)}
                         />
                     )
                 })}

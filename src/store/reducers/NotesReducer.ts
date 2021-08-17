@@ -60,6 +60,11 @@ export const notesReducer = (state = defaultState, action: Action): DefaultNotes
                 }
             }
             return state
+        case ActionNoteType.CHANGE_ACTIVE_NOTE_INDEX:
+            return {
+                activeNoteIndex: action.payload,
+                notes: [...state.notes]
+            }
         default:
             return state
     }

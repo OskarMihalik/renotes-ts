@@ -19,3 +19,12 @@ export const deleteActiveNote = () => {
         })
     }
 }
+
+export const changeActiveNoteIndex = (newActiveNoteIndex: number) => {
+    return (dispatch: Dispatch<Action>) => {
+        dispatch({
+            type: ActionNoteType.CHANGE_ACTIVE_NOTE_INDEX,
+            payload: newActiveNoteIndex
+        })
+    }
+}

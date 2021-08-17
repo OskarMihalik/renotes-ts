@@ -9,5 +9,9 @@ interface AddNoteAction {
 interface DeleteNoteAction{
     type: ActionNoteType.DELETE_ACTIVE_NOTE
 }
+interface ChangeActiveNoteIndex {
+    type: ActionNoteType.CHANGE_ACTIVE_NOTE_INDEX,
+    payload: number,
+}
 
-export type Action = AddNoteAction | DeleteNoteAction
+export type Action = AddNoteAction | DeleteNoteAction | ChangeActiveNoteIndex
