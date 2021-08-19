@@ -9,14 +9,15 @@ import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 
 // to create draggable notes https://javascript.plainenglish.io/how-to-make-a-simple-custom-drag-to-move-component-in-react-f67d5c99f925
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles<Theme, StylePropsI>((theme: Theme) =>
     createStyles({
         appGrid: {
             height: "100vh",
             display: 'grid',
-            gridTemplateColumns: '0.02fr 30% 1fr',
+            gridTemplateColumns: (styleProps)=> styleProps.notesOpen ? '0.02fr 30% 1fr' : '0.02fr 0 1fr',
             gridTemplateRows: '.05fr 1fr 1fr',
-            gridTemplateAreas: '"sidebar treeview noteInfo" "sidebar treeview note" "sidebar treeview note"'
+            gridTemplateAreas: '"sidebar treeview noteInfo" "sidebar treeview note" "sidebar treeview note"',
+
         },
         sidebar: {
             gridArea: 'sidebar',
@@ -29,7 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
             borderWidth: '0px 1px 0px 0px',
             borderStyle: 'solid',
             borderColor: theme.palette.text.primary,
-            padding: '10px 10px 10px 0px'
+            padding: '10px 10px 10px 0px',
+            visibility: (styleProps)=> styleProps.notesOpen ? 'visible' : 'hidden'
         },
         noteInfo: {
             gridArea: 'noteInfo'
@@ -39,8 +41,15 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     }))
 
+interface StylePropsI{
+    notesOpen: boolean
+}
+
 function App() {
-    const styles = useStyles()
+    const stylePropsI: StylePropsI = {
+        notesOpen: false
+    }
+    const styles = useStyles(stylePropsI)
     return (
         <div className={styles.appGrid}>
             <div className={styles.sidebar}><Sidebar/></div>
