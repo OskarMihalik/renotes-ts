@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Sidebar: FC = () => {
     const dispatch = useDispatch()
-    const {addNote} = bindActionCreators(actionCreators, dispatch)
+    const {addNote, deleteActiveNote} = bindActionCreators(actionCreators, dispatch)
     const classes = useStyles();
     const fileInputRef=useRef<HTMLInputElement>(null);
 
@@ -55,7 +55,7 @@ const Sidebar: FC = () => {
             </Button>
             <Button
                 className={classes.element}
-
+                onClick={()=> deleteActiveNote()}
             >
                 <DeleteIcon style={{transform: "rotate(90deg)"}}/>
             </Button>
