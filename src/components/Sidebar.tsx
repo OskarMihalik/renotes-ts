@@ -1,4 +1,4 @@
-import React, {ClassAttributes, FC, RefObject, useRef} from 'react';
+import React, {ClassAttributes, FC, RefObject, useRef, useState} from 'react';
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
 import AddIcon from "@material-ui/icons/Add";
@@ -8,8 +8,8 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {actionCreators, State} from '../store'
-import {DefaultNoteStateI} from '../store/reducers/NotesReducer'
 import {v4 as uuidv4} from 'uuid';
+import DeleteNotePopUp from "./DeleteNotePopUp";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -34,6 +34,12 @@ const Sidebar: FC = () => {
     const {addNote, deleteActiveNote, changeNotesOpen, changeIsDarkMode} = bindActionCreators(actionCreators, dispatch)
     const classes = useStyles();
     const fileInputRef=useRef<HTMLInputElement>(null);
+
+    const [isDeletePopUpOpen, setDeletePopUpOpen] = useState(false)
+
+    const changePopUpOpen = () => {
+        setDeletePopUpOpen(!isDeletePopUpOpen)
+    }
 
     return (
         <div className={classes.root}>
@@ -61,10 +67,11 @@ const Sidebar: FC = () => {
             </Button>
             <Button
                 className={classes.element}
-                onClick={()=> deleteActiveNote()}
+                onClick={()=> changePopUpOpen()}
             >
                 <DeleteIcon style={{transform: "rotate(90deg)"}}/>
             </Button>
+            <DeleteNotePopUp isDeletePopupOpen={isDeletePopUpOpen} changePopUpOpen={changePopUpOpen}/>
             <Button
                 className={classes.element}
                 onClick={() => {
