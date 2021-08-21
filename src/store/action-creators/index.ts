@@ -1,7 +1,7 @@
 import {DefaultNoteStateI} from "../reducers/NotesReducer";
-import {ActionNoteType} from "../action-types";
+import {ActionGlobalType, ActionNoteType} from "../action-types";
 import {Dispatch} from "redux";
-import {Action} from "../actions";
+import {Action, ActionGlobal} from "../actions";
 
 export const addNote = (note: DefaultNoteStateI) => {
     return (dispatch: Dispatch<Action>) => {
@@ -25,6 +25,14 @@ export const changeActiveNoteIndex = (newActiveNoteIndex: number) => {
         dispatch({
             type: ActionNoteType.CHANGE_ACTIVE_NOTE_INDEX,
             payload: newActiveNoteIndex
+        })
+    }
+}
+
+export const changeNotesOpen = () => {
+    return (dispatch: Dispatch<ActionGlobal>) =>{
+        dispatch({
+            type: ActionGlobalType.CHANGE_NOTES_OPEN
         })
     }
 }

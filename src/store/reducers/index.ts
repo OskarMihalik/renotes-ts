@@ -1,9 +1,10 @@
 import {combineReducers} from 'redux'
 import {notesReducer} from "./NotesReducer";
-
+import {globalReducer} from './GlobalReducer'
 
 const reducers = combineReducers({
-    notes: notesReducer
+    notes: notesReducer,
+    globals: globalReducer,
 })
 
 export default reducers

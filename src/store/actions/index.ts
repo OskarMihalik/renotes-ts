@@ -1,5 +1,6 @@
 import {DefaultNoteStateI} from "../reducers/NotesReducer";
 import {ActionNoteType} from "../action-types";
+import {ActionGlobalType} from "../action-types";
 
 interface AddNoteAction {
     type: ActionNoteType.ADD_NOTE,
@@ -15,3 +16,13 @@ interface ChangeActiveNoteIndex {
 }
 
 export type Action = AddNoteAction | DeleteNoteAction | ChangeActiveNoteIndex
+
+interface ChangeIfDarkMode{
+    type: ActionGlobalType.CHANGE_IS_DARK_MODE
+}
+
+interface ChangeNotesOpen {
+    type: ActionGlobalType.CHANGE_NOTES_OPEN
+}
+
+export type ActionGlobal = ChangeNotesOpen | ChangeIfDarkMode

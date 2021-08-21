@@ -30,13 +30,18 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Sidebar: FC = () => {
     const dispatch = useDispatch()
-    const {addNote, deleteActiveNote} = bindActionCreators(actionCreators, dispatch)
+    const {addNote, deleteActiveNote, changeNotesOpen} = bindActionCreators(actionCreators, dispatch)
     const classes = useStyles();
     const fileInputRef=useRef<HTMLInputElement>(null);
 
     return (
         <div className={classes.root}>
-            <Button className={classes.element}>Notes</Button>
+            <Button
+                className={classes.element}
+                onClick={()=>{
+                    changeNotesOpen()
+                }}
+            >Notes</Button>
             <Button className={classes.element}>Export</Button>
             <Button className={classes.element}>
                 Import

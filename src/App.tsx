@@ -6,7 +6,8 @@ import Sidebar from "./components/Sidebar";
 import NoteInfo from "./components/NoteInfo";
 import Note from "./components/Note";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-
+import {useSelector} from "react-redux";
+import {State} from "./store";
 // to create draggable notes https://javascript.plainenglish.io/how-to-make-a-simple-custom-drag-to-move-component-in-react-f67d5c99f925
 
 const useStyles = makeStyles<Theme, StylePropsI>((theme: Theme) =>
@@ -46,8 +47,10 @@ interface StylePropsI{
 }
 
 function App() {
+    const globals = useSelector((state: State) => state.globals)
+
     const stylePropsI: StylePropsI = {
-        notesOpen: false
+        notesOpen: globals.areNotesOpen
     }
     const styles = useStyles(stylePropsI)
     return (
