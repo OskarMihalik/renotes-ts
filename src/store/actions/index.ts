@@ -17,7 +17,7 @@ interface ChangeActiveNoteIndex {
 
 export type Action = AddNoteAction | DeleteNoteAction | ChangeActiveNoteIndex
 
-interface ChangeIfDarkMode{
+interface ChangeIsDarkMode{
     type: ActionGlobalType.CHANGE_IS_DARK_MODE
 }
 
@@ -25,4 +25,4 @@ interface ChangeNotesOpen {
     type: ActionGlobalType.CHANGE_NOTES_OPEN
 }
 
-export type ActionGlobal = ChangeNotesOpen | ChangeIfDarkMode
+export type ActionGlobal = ChangeNotesOpen | ChangeIsDarkMode

@@ -36,3 +36,11 @@ export const changeNotesOpen = () => {
         })
     }
 }
+
+export const  changeIsDarkMode = () => {
+    return (dispatch: Dispatch<ActionGlobal>) =>{
+        dispatch({
+            type: ActionGlobalType.CHANGE_IS_DARK_MODE
+        })
+    }
+}

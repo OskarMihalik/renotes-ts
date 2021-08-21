@@ -1,6 +1,6 @@
-import React from 'react';
-import {Box} from "@material-ui/core";
-
+import React, {useMemo} from 'react';
+import {createTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Treeview from "./components/Treeview";
 import Sidebar from "./components/Sidebar";
 import NoteInfo from "./components/NoteInfo";
@@ -8,6 +8,7 @@ import Note from "./components/Note";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import {useSelector} from "react-redux";
 import {State} from "./store";
+import CssBaseline from "@material-ui/core/CssBaseline";
 // to create draggable notes https://javascript.plainenglish.io/how-to-make-a-simple-custom-drag-to-move-component-in-react-f67d5c99f925
 
 const useStyles = makeStyles<Theme, StylePropsI>((theme: Theme) =>
@@ -49,17 +50,31 @@ interface StylePropsI{
 function App() {
     const globals = useSelector((state: State) => state.globals)
 
+    const custom_theme = useMemo(
+        () =>
+            createTheme({
+                palette: {
+                    type: globals.isDarkMode ? 'dark' : 'light',
+                },
+            }),
+        [globals.isDarkMode],
+    );
+
     const stylePropsI: StylePropsI = {
         notesOpen: globals.areNotesOpen
     }
     const styles = useStyles(stylePropsI)
     return (
-        <div className={styles.appGrid}>
-            <div className={styles.sidebar}><Sidebar/></div>
-            <div className={styles.treeview}><Treeview/></div>
-            <div className={styles.noteInfo}><NoteInfo/></div>
-            <div className={styles.note}><Note/></div>
-        </div>
+        <MuiThemeProvider theme={custom_theme}>
+            <CssBaseline>
+                <div className={styles.appGrid}>
+                    <div className={styles.sidebar}><Sidebar/></div>
+                    <div className={styles.treeview}><Treeview/></div>
+                    <div className={styles.noteInfo}><NoteInfo/></div>
+                    <div className={styles.note}><Note/></div>
+                </div>
+            </CssBaseline>
+        </MuiThemeProvider>
     );
 }
 

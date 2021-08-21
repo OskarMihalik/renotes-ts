@@ -5,9 +5,9 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
-import {actionCreators} from '../store'
+import {actionCreators, State} from '../store'
 import {DefaultNoteStateI} from '../store/reducers/NotesReducer'
 import {v4 as uuidv4} from 'uuid';
 
@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Sidebar: FC = () => {
     const dispatch = useDispatch()
-    const {addNote, deleteActiveNote, changeNotesOpen} = bindActionCreators(actionCreators, dispatch)
+    const globals = useSelector((state: State) => state.globals)
+    const {addNote, deleteActiveNote, changeNotesOpen, changeIsDarkMode} = bindActionCreators(actionCreators, dispatch)
     const classes = useStyles();
     const fileInputRef=useRef<HTMLInputElement>(null);
 
@@ -66,7 +67,14 @@ const Sidebar: FC = () => {
             </Button>
             <Button
                 className={classes.element}
+                onClick={() => {
+                    changeIsDarkMode()
+                }}
             >
+                {globals.isDarkMode ?
+                    <Brightness7Icon style={{transform: "rotate(90deg)"}}/> :
+                    <Brightness4Icon style={{transform: "rotate(90deg)"}}/>}
+
             </Button>
         </div>
     );
